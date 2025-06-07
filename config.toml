@@ -1,0 +1,4 @@
+baseURL = "https://choijwww.github.io/portfolio-2025-hiringonly/"
+languageCode = "en-us"
+title = "Portfolio 2025"
+theme = "jekyll-theme-primer"
