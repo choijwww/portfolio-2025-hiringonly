@@ -1,0 +1,35 @@
+name: Deploy Quartz v4 site to GitHub Pages
+
+on:
+  push:
+    branches:
+      - v4   # v4 브랜치에 푸시될 때마다 실행
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: '0.111.3'  # 원하는 hugo 버전 지정 가능
+
+      - name: Build the site
+        run: hugo --minify
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          publish_dir: ./public
+          # 대상 브랜치 지정 (기본: gh-pages)
+          # 기본 설정이면 생략 가능
+          # target_branch: gh-pages  
+          # 커밋 유저명/메일 설정(선택)
+          commit_user_name: github-actions
+          commit_user_email: github-actions@github.com
+          # 메인 브랜치와 다르면 --allow-empty 옵션 추가 가능
+          # force_orphan: true  # 최초 배포 시 활성화하면 좋음
